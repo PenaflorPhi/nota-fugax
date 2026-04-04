@@ -85,3 +85,15 @@ pub async fn create_thread(
 
     StatusCode::CREATED
 }
+
+pub async fn clear_messages(
+    State(pool): State<SqlitePool>,
+    Path(thread_id): Path<String>,
+) -> StatusCode {
+    sqlx::query!("DELETE FROM messages WHERE thread_id = ?", thread_id)
+        .execute(&pool)
+        .await
+        .expect("Failed to clear messages.");
+
+    StatusCode::OK
+}

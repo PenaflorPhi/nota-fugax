@@ -1,0 +1,27 @@
+#notepad-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#notepad-text {
+  flex: 1;
+  background: #0f0f0f;
+  border: none;
+  border-bottom: 1px solid #2a2a2a;
+  color: #e0e0e0;
+  font-family: monospace;
+  font-size: 0.9rem;
+  padding: 24px;
+  resize: none;
+  outline: none;
+}
+
+#btn-save {
+  align-self: flex-end;
+  margin: 16px;
+}
+
+#notepad-view[hidden] {
+  display: none;
+}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nota-Fugax</title>
+    <link rel="stylesheet" href="/static/css/base.css" />
+    <link rel="stylesheet" href="/static/css/landing.css" />
+    <link rel="stylesheet" href="/static/css/forum.css" />
+    <link rel="stylesheet" href="/static/css/notepad.css" />
+  </head>
+
+  <body>
+    <!-- Landing page: shown when no thread is active. -->
+    <div id="landing">
+      <h1>nota-fugax</h1>
+      <div id="mode-select">
+        <button id="btn-notepad">Notepad</button>
+        <button id="btn-forum">Forum</button>
+      </div>
+    </div>
+
+    <div id="thread" hidden>
+      <!-- Forum mode -->
+      <div id="forum-view" hidden>
+        <div id="messages">
+          <div class="message">Test message 1</div>
+          <div class="message">Test message 2</div>
+        </div>
+        <div id="forum-input">
+          <textarea id="forum-text" placeholder="Write a message..."></textarea>
+          <button id="btn-send">Send</button>
+        </div>
+      </div>
+
+      <!-- Notepad mode -->
+      <div id="notepad-view" hidden>
+        <textarea id="notepad-text" placeholder="Start writing..."></textarea>
+        <button id="btn-save">Save</button>
+      </div>
+    </div>
+
+    <script src="/static/js/crypto.js"></script>
+    <script src="/static/js/thread.js"></script>
+    <script src="/static/js/main.js"></script>
+  </body>
+</html>

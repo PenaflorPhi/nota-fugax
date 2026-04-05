@@ -12,7 +12,7 @@ async function createThread(mode) {
   const uuid = await generateUUID();
   const threadId = await hashUUID(uuid);
 
-  await fetch("/", {
+  await fetch("/api", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ thread_id: threadId }),
@@ -26,7 +26,7 @@ async function createThread(mode) {
 // Fetches all messages for a thread and renders them based on mode.
 async function loadMessages(uuid, mode) {
   const threadId = await hashUUID(uuid);
-  const response = await fetch(`/${threadId}`);
+  const response = await fetch(`/api/${threadId}`);
   const messages = await response.json();
 
   if (mode === "forum") {
@@ -63,18 +63,15 @@ async function renderNotepad(messages, uuid) {
 document.getElementById("btn-save").addEventListener("click", async () => {
   const params = parseFragment();
   const threadId = await hashUUID(params.uuid);
-
-  console.log("saving to", `/${threadId}/messages`);
-
   const content = document.getElementById("notepad-text").value;
 
   const encrypted = await encrypt(params.uuid, content);
 
-  await fetch(`/${threadId}/messages`, {
+  await fetch(`/api/${threadId}/messages`, {
     method: "DELETE",
   });
 
-  await fetch(`/${threadId}/messages`, {
+  await fetch(`/api/${threadId}/messages`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ciphertext: encrypted }),
@@ -93,7 +90,7 @@ document.getElementById("btn-send").addEventListener("click", async () => {
 
   const encrypted = await encrypt(params.uuid, content);
 
-  await fetch(`/${threadId}/messages`, {
+  await fetch(`/api/${threadId}/messages`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ciphertext: encrypted }),

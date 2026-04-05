@@ -4,7 +4,7 @@ A zero-knowledge, ephemeral sharing platform. It runs two modes -- a shared note
 
 ## How it works
 
-When you open the app, your browser generates a random UUID. This UUID is placed in the URL fragment (the part after `#`), which browsers never send to the server. The server never sees it.
+When you open the app, your browser generates a random UUID. This UUID is placed in the URL fragment (the part after `#`), which browsers never send to the server.
 
 From that UUID, two things are derived entirely client-side:
 

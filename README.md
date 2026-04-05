@@ -4,7 +4,7 @@ A zero-knowledge, ephemeral sharing platform. It runs two modes -- a shared note
 
 ## How it works
 
-When you open the app, your browser generates a random UUID. This UUID is placed in the URL fragment (the part after `#`), which browsers never send to the server.
+When you open the app, your browser generates a random UUID. This UUID is placed in the URL fragment (the part after `#`), which browsers never send to the server. The server never sees it.
 
 From that UUID, two things are derived entirely client-side:
 
@@ -35,10 +35,10 @@ The server exposes the same API for both. It does not know which mode a thread i
 
 | Method | Route | Description |
 |--------|-------|-------------|
-| `POST` | `/` | Create a thread (receives SHA-256 thread ID) |
-| `GET` | `/{thread_id}` | Fetch all ciphertext blobs, ordered by timestamp |
-| `POST` | `/{thread_id}/messages` | Append a ciphertext blob |
-| `DELETE` | `/{thread_id}/messages` | Clear all messages (used by notepad before saving) |
+| `POST` | `/api` | Create a thread (receives SHA-256 thread ID) |
+| `GET` | `/api/{thread_id}` | Fetch all ciphertext blobs, ordered by timestamp |
+| `POST` | `/api/{thread_id}/messages` | Append a ciphertext blob |
+| `DELETE` | `/api/{thread_id}/messages` | Clear all messages (used by notepad before saving) |
 
 ## Stack
 
@@ -50,31 +50,39 @@ The server exposes the same API for both. It does not know which mode a thread i
 ```
 nota-fugax/
 ├── src/
-│   └── main.rs          # Axum server, API routes, SQLite setup
+│   ├── main.rs        # Entrypoint: binds the server, initializes the DB pool
+│   ├── db.rs          # SQLite connection and migration runner
+│   ├── handlers.rs    # API request handlers
+│   └── routes.rs      # Router definition and static file serving
 ├── static/
-│   ├── index.html       # SPA: landing page, notepad, and forum views
-│   ├── style.css
-│   └── app.js           # Client-side crypto, UUID generation, API calls
+│   ├── index.html     # SPA: landing page, notepad, and forum views
+│   ├── css/           # Stylesheets (base, landing, forum, notepad)
+│   └── js/            # Client-side crypto, thread logic, main entry
 ├── migrations/
-│   └── *.sql            # SQLite schema (embedded at compile time via sqlx)
+│   └── *.sql          # SQLite schema (embedded at compile time via sqlx)
+├── Cross.toml         # Cross-compilation config (aarch64-unknown-linux-gnu)
+├── Makefile           # Build and deploy targets
 ├── Cargo.toml
 └── README.md
 ```
 
-The frontend is a single-page application served as static files by Axum. On load, it parses the URL fragment. If a UUID and mode are present, it renders the thread view. Otherwise, it shows the landing page.
+The frontend is a single-page application served as a fallback by Axum. On load, it parses the URL fragment. If a UUID and mode are present, it renders the thread view. Otherwise, it shows the landing page.
 
 ## Running locally
 
 **Prerequisites**: Rust toolchain (stable), SQLite.
 
 ```bash
-# Clone and run
 git clone https://github.com/PenaflorPhi/nota-fugax.git
 cd nota-fugax
 cargo run
 ```
 
-The server starts on `http://localhost:3000`. Open it in a browser. Database migrations run automatically on startup (embedded via `sqlx::migrate!`).
+The server starts on `http://localhost:3000`. The SQLite database is created automatically at `data/threads.db` and migrations run on startup via `sqlx::migrate!`. Set `DATABASE_URL` to override the default path.
+
+## Deployment
+
+Cross-compilation to `aarch64-unknown-linux-gnu` is configured via `Cross.toml`. The Makefile provides `build` and `deploy` targets for building with `cross` and deploying over SSH.
 
 ## Roadmap
 

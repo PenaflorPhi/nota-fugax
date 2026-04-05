@@ -3,6 +3,7 @@
 A zero-knowledge, ephemeral sharing platform. It runs two modes:
 - A shared notepad and
 - An anonymous forum
+
 The server cannot tell which is which.
 
 There are no user accounts, no cookies, no tracking. The server stores only encrypted blobs it cannot read, indexed by hashes it cannot reverse. If someone dumps the database, they get nothing usable.

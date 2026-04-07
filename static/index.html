@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nota-Fugax</title>
+    <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/css/base.css" />
     <link rel="stylesheet" href="/css/landing.css" />
     <link rel="stylesheet" href="/css/forum.css" />
@@ -51,7 +52,7 @@
       <footer>
         <div class="footer-content">
           <a href="https://penaflor.dev/status" target="_blank" rel="noopener">
-            <i class="fa-brands fa-raspberry-pi"></i>
+            <img src="/icons/raspberry-pi.svg" width="12" height="12" alt="" />
             Served fresh from a Raspberry Pi
           </a>
         </div>
@@ -63,18 +64,22 @@
       <div id="forum-view" hidden>
         <div id="messages"></div>
         <div id="forum-input">
-          <button id="btn-copy-link" title="Copy link">copy link</button>
+          <button id="btn-copy-link" title="Copy link">
+            <img src="/icons/copy.svg" width="16" height="16" alt="Copy link" />
+          </button>
           <textarea id="forum-text" placeholder="Write a message..."></textarea>
           <button id="btn-send">Send</button>
         </div>
       </div>
       <!-- Notepad mode -->
       <div id="notepad-view" hidden>
-        <div id="notepad-toolbar">
-          <button id="btn-copy-link" title="Copy link">copy link</button>
-        </div>
         <textarea id="notepad-text" placeholder="Start writing..."></textarea>
-        <button id="btn-save">Save</button>
+        <div id="notepad-actions">
+          <button id="btn-copy-link" title="Copy link">
+            <img src="/icons/copy.svg" width="16" height="16" alt="Copy link" />
+          </button>
+          <button id="btn-save">Save</button>
+        </div>
       </div>
     </div>
 

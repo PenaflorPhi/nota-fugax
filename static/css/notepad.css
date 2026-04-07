@@ -17,9 +17,13 @@
   outline: none;
 }
 
-#btn-save {
-  align-self: flex-end;
-  margin: 16px;
+#notepad-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid #2a2a2a;
 }
 
 #notepad-view[hidden] {

@@ -20,6 +20,7 @@
   max-width: 70%;
   line-height: 1.5;
   font-size: 0.9rem;
+  word-break: break-word;
 }
 
 #forum-input {
@@ -34,7 +35,7 @@
   background: #1a1a1a;
   border: 1px solid #2a2a2a;
   color: #e0e0e0;
-  font-family: monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 0.9rem;
   padding: 10px;
   resize: none;

@@ -8,9 +8,22 @@
     <link rel="stylesheet" href="/css/landing.css" />
     <link rel="stylesheet" href="/css/forum.css" />
     <link rel="stylesheet" href="/css/notepad.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
   </head>
 
   <body>
+    <header id="site-nav">
+      <a href="https://penaflor.dev" target="_blank" rel="noopener noreferrer"
+        >penaflor.dev</a
+      >
+      <a
+        href="https://github.com/PenaflorPhi/nota-fugax"
+        target="_blank"
+        rel="noopener noreferrer"
+        >github</a
+      >
+    </header>
+
     <!-- Landing page: shown when no thread is active. -->
     <div id="landing">
       <h1>nota-fugax</h1>
@@ -18,23 +31,48 @@
         <button id="btn-notepad">Notepad</button>
         <button id="btn-forum">Forum</button>
       </div>
+      <div id="landing-description">
+        <p>
+          Your text is encrypted on your device before it ever reaches the
+          server. The server stores ciphertext — it has no keys, no plaintext,
+          no way to read what you wrote.
+        </p>
+        <p>
+          Don't take our word for it. The source is open and the server is
+          self-hostable — run your own instance if you prefer.
+        </p>
+        <p>
+          Share a thought anonymously with a single link, or open an encrypted
+          thread and invite someone to reply. No accounts, no tracking, no
+          metadata beyond what the protocol requires. Just share your link and
+          speak freely.
+        </p>
+      </div>
+      <footer>
+        <div class="footer-content">
+          <a href="https://penaflor.dev/status" target="_blank" rel="noopener">
+            <i class="fa-brands fa-raspberry-pi"></i>
+            Served fresh from a Raspberry Pi
+          </a>
+        </div>
+      </footer>
     </div>
 
     <div id="thread" hidden>
       <!-- Forum mode -->
       <div id="forum-view" hidden>
-        <div id="messages">
-          <div class="message">Test message 1</div>
-          <div class="message">Test message 2</div>
-        </div>
+        <div id="messages"></div>
         <div id="forum-input">
+          <button id="btn-copy-link" title="Copy link">copy link</button>
           <textarea id="forum-text" placeholder="Write a message..."></textarea>
           <button id="btn-send">Send</button>
         </div>
       </div>
-
       <!-- Notepad mode -->
       <div id="notepad-view" hidden>
+        <div id="notepad-toolbar">
+          <button id="btn-copy-link" title="Copy link">copy link</button>
+        </div>
         <textarea id="notepad-text" placeholder="Start writing..."></textarea>
         <button id="btn-save">Save</button>
       </div>

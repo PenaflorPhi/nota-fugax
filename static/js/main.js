@@ -54,3 +54,11 @@ function showThread(uuid, mode) {
 
 window.addEventListener("hashchange", init);
 init();
+
+document.querySelectorAll("#btn-copy-link").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(window.location.href);
+    btn.textContent = "copied!";
+    setTimeout(() => (btn.textContent = "copy link"), 2000);
+  });
+});
